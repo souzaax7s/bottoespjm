@@ -1,0 +1,25 @@
+{
+  "name": "BOTÕES PJM",
+  "short_name": "PJM",
+  "description": "Sistema para controle de produção de botões.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8F5EE",
+  "theme_color": "#B8860B",
+  "icons": [
+    {
+      "src": "/icons/pjm-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/pjm-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

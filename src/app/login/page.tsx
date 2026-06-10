@@ -6,7 +6,13 @@ import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -39,10 +45,12 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-4">
-      <Card className="w-full max-w-md border-zinc-800 bg-zinc-900/80 text-white shadow-2xl">
+    <main className="flex min-h-screen items-center justify-center bg-[#F8F5EE] px-4 text-[#1C1917]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#F0DFB8,transparent_35%)]" />
+
+      <Card className="relative w-full max-w-md border-[#E7DEC8] bg-white text-[#1C1917] shadow-2xl">
         <CardHeader className="space-y-2">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-zinc-950 font-black text-xl">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-[#D8C08A] bg-white text-xl font-black text-[#1C1917] shadow-sm">
             PJM
           </div>
 
@@ -50,7 +58,7 @@ export default function LoginPage() {
             BOTÕES PJM
           </CardTitle>
 
-          <CardDescription className="text-center text-zinc-400">
+          <CardDescription className="text-center text-[#7A6A53]">
             Entre para controlar produção, histórico e financeiro.
           </CardDescription>
         </CardHeader>
@@ -66,7 +74,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                className="bg-zinc-950 border-zinc-800 text-white"
+                className="border-[#E7DEC8] bg-[#FFFCF7] text-[#1C1917]"
               />
             </div>
 
@@ -79,17 +87,21 @@ export default function LoginPage() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
-                className="bg-zinc-950 border-zinc-800 text-white"
+                className="border-[#E7DEC8] bg-[#FFFCF7] text-[#1C1917]"
               />
             </div>
 
             {erro && (
-              <p className="rounded-lg border border-red-900 bg-red-950/50 px-3 py-2 text-sm text-red-300">
+              <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
                 {erro}
               </p>
             )}
 
-            <Button type="submit" disabled={loading} className="w-full">
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#B8860B] text-white hover:bg-[#9A7008]"
+            >
               {loading ? 'Entrando...' : 'Entrar'}
             </Button>
           </form>

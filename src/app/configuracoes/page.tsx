@@ -120,8 +120,8 @@ export default function ConfiguracoesPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-        <p className="text-zinc-400">Carregando configurações...</p>
+      <main className="min-h-screen bg-[#F8F5EE] text-[#1C1917] flex items-center justify-center">
+        <p className="text-[#7A6A53]">Carregando configurações...</p>
       </main>
     )
   }
@@ -145,7 +145,7 @@ export default function ConfiguracoesPage() {
         )}
 
         <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
               <CardTitle>Valor unitário do botão</CardTitle>
             </CardHeader>
@@ -159,15 +159,15 @@ export default function ConfiguracoesPage() {
                   onChange={(event) => setValorBotao(event.target.value)}
                   placeholder="0,05"
                   disabled={!isAdmin || salvando}
-                  className="border-zinc-800 bg-zinc-950 text-white"
+                  className="border-[#E7DEC8] bg-[#F8F5EE] text-[#1C1917]"
                 />
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm text-[#7A6A53]">
                   Use vírgula ou ponto. Exemplo: 0,05 ou 0.05.
                 </p>
               </div>
 
               {!isAdmin && (
-                <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
+                <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
                   Seu perfil é OPERADOR. Você pode consultar esta tela, mas não pode alterar o valor.
                 </div>
               )}
@@ -175,7 +175,7 @@ export default function ConfiguracoesPage() {
               <Button
                 onClick={salvarConfiguracao}
                 disabled={!isAdmin || salvando}
-                className="w-full"
+                className="w-full bg-[#B8860B] text-white hover:bg-[#9A7008]"
               >
                 <Save className="mr-2 h-4 w-4" />
                 {salvando ? 'Salvando...' : 'Salvar novo valor'}
@@ -183,27 +183,27 @@ export default function ConfiguracoesPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
               <CardTitle>Resumo atual</CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-4">
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
-                <p className="text-sm text-zinc-400">Valor atual</p>
+              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4">
+                <p className="text-sm text-[#7A6A53]">Valor atual</p>
                 <p className="mt-1 text-3xl font-bold">
                   {formatarMoeda(Number(configuracao?.valor_botao ?? 0))}
                 </p>
               </div>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
-                <p className="text-sm text-zinc-400">Perfil logado</p>
+              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4">
+                <p className="text-sm text-[#7A6A53]">Perfil logado</p>
                 <p className="mt-1 text-xl font-bold uppercase">
                   {profile?.role}
                 </p>
               </div>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
+              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
                 Alterar o valor aqui afeta apenas os próximos registros. Produções antigas permanecem com o valor original salvo no momento do lançamento.
               </div>
             </CardContent>

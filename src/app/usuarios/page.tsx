@@ -209,12 +209,12 @@ export default function UsuariosPage() {
         )}
 
         {!isAdmin && !loading && (
-          <Card className="max-w-3xl border-zinc-800 bg-zinc-900 text-white">
+          <Card className="max-w-3xl border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
               <CardTitle>Acesso restrito</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-zinc-400">
+              <p className="text-[#7A6A53]">
                 Apenas administradores podem gerenciar usuários.
               </p>
             </CardContent>
@@ -224,9 +224,9 @@ export default function UsuariosPage() {
         {isAdmin && (
           <>
             <div className="mb-6 grid gap-4 md:grid-cols-4">
-              <Card className="border-zinc-800 bg-zinc-900 text-white">
+              <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
                 <CardHeader>
-                  <CardTitle className="text-sm text-zinc-400">
+                  <CardTitle className="text-sm text-[#7A6A53]">
                     Total de usuários
                   </CardTitle>
                 </CardHeader>
@@ -235,9 +235,9 @@ export default function UsuariosPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-zinc-800 bg-zinc-900 text-white">
+              <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
                 <CardHeader>
-                  <CardTitle className="text-sm text-zinc-400">
+                  <CardTitle className="text-sm text-[#7A6A53]">
                     Ativos
                   </CardTitle>
                 </CardHeader>
@@ -246,9 +246,9 @@ export default function UsuariosPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-zinc-800 bg-zinc-900 text-white">
+              <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
                 <CardHeader>
-                  <CardTitle className="text-sm text-zinc-400">
+                  <CardTitle className="text-sm text-[#7A6A53]">
                     Admins
                   </CardTitle>
                 </CardHeader>
@@ -257,9 +257,9 @@ export default function UsuariosPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-zinc-800 bg-zinc-900 text-white">
+              <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
                 <CardHeader>
-                  <CardTitle className="text-sm text-zinc-400">
+                  <CardTitle className="text-sm text-[#7A6A53]">
                     Operadores
                   </CardTitle>
                 </CardHeader>
@@ -269,7 +269,7 @@ export default function UsuariosPage() {
               </Card>
             </div>
 
-            <Card className="border-zinc-800 bg-zinc-900 text-white">
+            <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Lista de usuários</CardTitle>
 
@@ -279,21 +279,21 @@ export default function UsuariosPage() {
               </CardHeader>
 
               <CardContent>
-                <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
+                <div className="mb-4 rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
                   Novos usuários devem ser criados primeiro no Supabase Authentication.
                   Depois eles aparecem aqui automaticamente como OPERADOR.
                 </div>
 
-                <div className="overflow-hidden rounded-xl border border-zinc-800">
+                <div className="overflow-hidden rounded-xl border border-[#E7DEC8]">
                   <Table>
                     <TableHeader>
-                      <TableRow className="border-zinc-800">
-                        <TableHead className="text-zinc-400">Nome</TableHead>
-                        <TableHead className="text-zinc-400">Email</TableHead>
-                        <TableHead className="text-zinc-400">Cargo</TableHead>
-                        <TableHead className="text-zinc-400">Status</TableHead>
-                        <TableHead className="text-zinc-400">Criado em</TableHead>
-                        <TableHead className="text-right text-zinc-400">
+                      <TableRow className="border-[#E7DEC8]">
+                        <TableHead className="text-[#7A6A53]">Nome</TableHead>
+                        <TableHead className="text-[#7A6A53]">Email</TableHead>
+                        <TableHead className="text-[#7A6A53]">Cargo</TableHead>
+                        <TableHead className="text-[#7A6A53]">Status</TableHead>
+                        <TableHead className="text-[#7A6A53]">Criado em</TableHead>
+                        <TableHead className="text-right text-[#7A6A53]">
                           Ações
                         </TableHead>
                       </TableRow>
@@ -301,20 +301,20 @@ export default function UsuariosPage() {
 
                     <TableBody>
                       {loading ? (
-                        <TableRow className="border-zinc-800">
-                          <TableCell colSpan={6} className="py-8 text-center text-zinc-500">
+                        <TableRow className="border-[#E7DEC8]">
+                          <TableCell colSpan={6} className="py-8 text-center text-[#9A8A73]">
                             Carregando usuários...
                           </TableCell>
                         </TableRow>
                       ) : usuarios.length === 0 ? (
-                        <TableRow className="border-zinc-800">
-                          <TableCell colSpan={6} className="py-8 text-center text-zinc-500">
+                        <TableRow className="border-[#E7DEC8]">
+                          <TableCell colSpan={6} className="py-8 text-center text-[#9A8A73]">
                             Nenhum usuário encontrado.
                           </TableCell>
                         </TableRow>
                       ) : (
                         usuarios.map((usuario) => (
-                          <TableRow key={usuario.id} className="border-zinc-800">
+                          <TableRow key={usuario.id} className="border-[#E7DEC8]">
                             <TableCell className="font-medium">
                               {usuario.nome}
                               {profileAtual?.id === usuario.id && (
@@ -334,7 +334,7 @@ export default function UsuariosPage() {
                                 }
                                 disabled={salvandoId === usuario.id}
                               >
-                                <SelectTrigger className="w-36 border-zinc-800 bg-zinc-950 text-white">
+                                <SelectTrigger className="w-36 border-[#E7DEC8] bg-[#F8F5EE] text-[#1C1917]">
                                   <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -395,14 +395,14 @@ export default function UsuariosPage() {
         )}
 
         {isAdmin && (
-          <Card className="mt-6 max-w-4xl border-zinc-800 bg-zinc-900 text-white">
+          <Card className="mt-6 max-w-4xl border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="h-5 w-5" />
                 Segurança
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2 text-sm text-zinc-400">
+            <CardContent className="space-y-2 text-sm text-[#7A6A53]">
               <p>
                 A tela respeita as políticas RLS do Supabase. Apenas ADMIN pode
                 alterar cargo ou status.

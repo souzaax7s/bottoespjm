@@ -132,8 +132,8 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-        <p className="text-zinc-400">Carregando dashboard...</p>
+      <main className="min-h-screen bg-[#F8F5EE] text-[#1C1917] flex items-center justify-center">
+        <p className="text-[#7A6A53]">Carregando dashboard...</p>
       </main>
     )
   }
@@ -151,45 +151,45 @@ export default function DashboardPage() {
         )}
 
         <div className="grid gap-4 md:grid-cols-4">
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle className="text-sm text-zinc-400">
+              <CardTitle className="text-sm text-[#7A6A53]">
                 Produção de hoje
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold">{totalRegistrosHoje}</p>
-              <p className="mt-1 text-sm text-zinc-400">registros lançados</p>
+              <p className="mt-1 text-sm text-[#7A6A53]">registros lançados</p>
             </CardContent>
           </Card>
 
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle className="text-sm text-zinc-400">
+              <CardTitle className="text-sm text-[#7A6A53]">
                 Total de botões
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold">{totalBotoesHoje}</p>
-              <p className="mt-1 text-sm text-zinc-400">botões produzidos hoje</p>
+              <p className="mt-1 text-sm text-[#7A6A53]">botões produzidos hoje</p>
             </CardContent>
           </Card>
 
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle className="text-sm text-zinc-400">
+              <CardTitle className="text-sm text-[#7A6A53]">
                 Valor total do dia
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold">{formatarMoeda(valorTotalHoje)}</p>
-              <p className="mt-1 text-sm text-zinc-400">calculado automaticamente</p>
+              <p className="mt-1 text-sm text-[#7A6A53]">calculado automaticamente</p>
             </CardContent>
           </Card>
 
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle className="text-sm text-zinc-400">
+              <CardTitle className="text-sm text-[#7A6A53]">
                 Valor por botão
               </CardTitle>
             </CardHeader>
@@ -197,39 +197,39 @@ export default function DashboardPage() {
               <p className="text-3xl font-bold">
                 {formatarMoeda(Number(configuracao?.valor_botao ?? 0))}
               </p>
-              <p className="mt-1 text-sm text-zinc-400">valor atual configurado</p>
+              <p className="mt-1 text-sm text-[#7A6A53]">valor atual configurado</p>
             </CardContent>
           </Card>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
               <CardTitle>Últimos registros</CardTitle>
             </CardHeader>
 
             <CardContent>
-              <div className="overflow-hidden rounded-xl border border-zinc-800">
+              <div className="overflow-hidden rounded-xl border border-[#E7DEC8]">
                 <Table>
                   <TableHeader>
-                    <TableRow className="border-zinc-800">
-                      <TableHead className="text-zinc-400">Data</TableHead>
-                      <TableHead className="text-zinc-400">Quantidade</TableHead>
-                      <TableHead className="text-zinc-400">Descrição</TableHead>
-                      <TableHead className="text-right text-zinc-400">Valor</TableHead>
+                    <TableRow className="border-[#E7DEC8]">
+                      <TableHead className="text-[#7A6A53]">Data</TableHead>
+                      <TableHead className="text-[#7A6A53]">Quantidade</TableHead>
+                      <TableHead className="text-[#7A6A53]">Descrição</TableHead>
+                      <TableHead className="text-right text-[#7A6A53]">Valor</TableHead>
                     </TableRow>
                   </TableHeader>
 
                   <TableBody>
                     {ultimosRegistros.length === 0 ? (
-                      <TableRow className="border-zinc-800">
-                        <TableCell colSpan={4} className="py-8 text-center text-zinc-500">
+                      <TableRow className="border-[#E7DEC8]">
+                        <TableCell colSpan={4} className="py-8 text-center text-[#9A8A73]">
                           Nenhuma produção registrada ainda.
                         </TableCell>
                       </TableRow>
                     ) : (
                       ultimosRegistros.map((item) => (
-                        <TableRow key={item.id} className="border-zinc-800">
+                        <TableRow key={item.id} className="border-[#E7DEC8]">
                           <TableCell>{formatarData(item.created_at)}</TableCell>
                           <TableCell>{item.quantidade}</TableCell>
                           <TableCell>{item.descricao}</TableCell>
@@ -245,22 +245,22 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-zinc-800 bg-zinc-900 text-white">
+          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
             <CardHeader>
               <CardTitle>Ações rápidas</CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-3">
-              <Button className="w-full" onClick={() => router.push('/producao')}>
+              <Button className="w-full bg-[#B8860B] text-white hover:bg-[#9A7008]" onClick={() => router.push('/producao')}>
                 Registrar produção
               </Button>
 
-              <Button variant="outline" className="w-full" onClick={() => router.push('/historico')}>
+              <Button variant="outline" className="w-full bg-[#B8860B] text-white hover:bg-[#9A7008]" onClick={() => router.push('/historico')}>
                 Ver histórico
               </Button>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
-                <p className="font-medium text-white">Formato aceito:</p>
+              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
+                <p className="font-medium text-[#1C1917]">Formato aceito:</p>
                 <p className="mt-2">100 azul bb</p>
                 <p>80 preto</p>
                 <p>50 branco</p>

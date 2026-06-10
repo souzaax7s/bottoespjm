@@ -111,8 +111,8 @@ export default function NovaProducaoPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-        <p className="text-zinc-400">Carregando nova produção...</p>
+      <main className="min-h-screen bg-[#F8F5EE] text-[#1C1917] flex items-center justify-center">
+        <p className="text-[#7A6A53]">Carregando nova produção...</p>
       </main>
     )
   }
@@ -123,7 +123,7 @@ export default function NovaProducaoPage() {
       subtitle="Registre a produção diária usando entrada rápida."
     >
       <section className="grid max-w-7xl gap-6 lg:grid-cols-[1fr_1fr]">
-        <Card className="border-zinc-800 bg-zinc-900 text-white">
+        <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
           <CardHeader>
             <CardTitle>Entrada rápida</CardTitle>
           </CardHeader>
@@ -133,12 +133,12 @@ export default function NovaProducaoPage() {
               value={texto}
               onChange={(event) => setTexto(event.target.value)}
               placeholder={'100 azul bb\n80 preto\n50 branco\n10 bege'}
-              className="min-h-72 border-zinc-800 bg-zinc-950 text-white"
+              className="min-h-72 border-[#E7DEC8] bg-[#F8F5EE] text-[#1C1917]"
             />
 
-            <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
+            <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
               <p>Valor atual por botão:</p>
-              <p className="mt-1 text-lg font-semibold text-white">
+              <p className="mt-1 text-lg font-semibold text-[#1C1917]">
                 {formatarMoeda(valorBotao)}
               </p>
             </div>
@@ -163,54 +163,54 @@ export default function NovaProducaoPage() {
               </p>
             )}
 
-            <Button onClick={salvarProducao} disabled={salvando} className="w-full">
+            <Button onClick={salvarProducao} disabled={salvando} className="w-full bg-[#B8860B] text-white hover:bg-[#9A7008]">
               {salvando ? 'Salvando...' : 'Salvar produção'}
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="border-zinc-800 bg-zinc-900 text-white">
+        <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
           <CardHeader>
             <CardTitle>Prévia automática</CardTitle>
           </CardHeader>
 
           <CardContent>
             <div className="mb-4 grid grid-cols-2 gap-4">
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
-                <p className="text-sm text-zinc-400">Total de botões</p>
+              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4">
+                <p className="text-sm text-[#7A6A53]">Total de botões</p>
                 <p className="mt-1 text-2xl font-bold">
                   {resultado.totalQuantidade}
                 </p>
               </div>
 
-              <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4">
-                <p className="text-sm text-zinc-400">Valor total</p>
+              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4">
+                <p className="text-sm text-[#7A6A53]">Valor total</p>
                 <p className="mt-1 text-2xl font-bold">
                   {formatarMoeda(resultado.totalValor)}
                 </p>
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-xl border border-zinc-800">
+            <div className="overflow-hidden rounded-xl border border-[#E7DEC8]">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-zinc-800 hover:bg-zinc-900">
-                    <TableHead className="text-zinc-400">Quantidade</TableHead>
-                    <TableHead className="text-zinc-400">Descrição</TableHead>
-                    <TableHead className="text-right text-zinc-400">Valor</TableHead>
+                  <TableRow className="border-[#E7DEC8] hover:bg-white">
+                    <TableHead className="text-[#7A6A53]">Quantidade</TableHead>
+                    <TableHead className="text-[#7A6A53]">Descrição</TableHead>
+                    <TableHead className="text-right text-[#7A6A53]">Valor</TableHead>
                   </TableRow>
                 </TableHeader>
 
                 <TableBody>
                   {resultado.itens.length === 0 ? (
-                    <TableRow className="border-zinc-800">
-                      <TableCell colSpan={3} className="py-8 text-center text-zinc-500">
+                    <TableRow className="border-[#E7DEC8]">
+                      <TableCell colSpan={3} className="py-8 text-center text-[#9A8A73]">
                         Digite uma produção para ver a prévia.
                       </TableCell>
                     </TableRow>
                   ) : (
                     resultado.itens.map((item, index) => (
-                      <TableRow key={`${item.descricao}-${index}`} className="border-zinc-800">
+                      <TableRow key={`${item.descricao}-${index}`} className="border-[#E7DEC8]">
                         <TableCell>{item.quantidade}</TableCell>
                         <TableCell>{item.descricao}</TableCell>
                         <TableCell className="text-right">

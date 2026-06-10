@@ -69,17 +69,17 @@ export function AppShell({ title, subtitle, children }: AppShellProps) {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
+    <main className="min-h-screen bg-[#F8F5EE] text-[#1C1917]">
       <aside
-        className={`fixed left-0 top-0 z-40 h-screen border-r border-zinc-800 bg-zinc-950 transition-all duration-300 ${
+        className={`fixed left-0 top-0 z-40 h-screen border-r border-[#E7DEC8] bg-white shadow-sm transition-all duration-300 ${
           open ? 'w-64' : 'w-24'
         }`}
       >
-        <div className="flex h-24 items-center justify-center border-b border-zinc-800">
+        <div className="flex h-24 items-center justify-center border-b border-[#E7DEC8]">
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900 text-zinc-200 transition hover:bg-zinc-800"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#D8C08A] bg-[#F8F5EE] text-[#8A6508] transition hover:bg-[#EFE5CF]"
             aria-label="Abrir menu"
           >
             {open ? <X size={24} /> : <Menu size={28} />}
@@ -96,10 +96,10 @@ export function AppShell({ title, subtitle, children }: AppShellProps) {
                 key={item.href}
                 type="button"
                 onClick={() => router.push(item.href)}
-                className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-medium transition ${
+                className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-semibold transition ${
                   active
-                    ? 'bg-white text-zinc-950'
-                    : 'text-zinc-400 hover:bg-zinc-900 hover:text-white'
+                    ? 'bg-[#B8860B] text-white shadow-sm'
+                    : 'text-[#6F6250] hover:bg-[#F3EAD7] hover:text-[#8A6508]'
                 }`}
               >
                 <Icon size={22} />
@@ -111,21 +111,29 @@ export function AppShell({ title, subtitle, children }: AppShellProps) {
         </nav>
       </aside>
 
-      <section className={open ? 'pl-64 transition-all duration-300' : 'pl-24 transition-all duration-300'}>
-        <header className="sticky top-0 z-30 border-b border-zinc-800 bg-zinc-950/95 backdrop-blur">
+      <section
+        className={
+          open
+            ? 'pl-64 transition-all duration-300'
+            : 'pl-24 transition-all duration-300'
+        }
+      >
+        <header className="sticky top-0 z-30 border-b border-[#E7DEC8] bg-white/95 backdrop-blur">
           <div className="flex min-h-24 items-center justify-between px-8">
             <div>
-              <p className="text-sm text-zinc-400">BOTÕES PJM</p>
-              <h1 className="text-2xl font-bold">{title}</h1>
+              <p className="text-sm font-semibold text-[#B8860B]">
+                BOTÕES PJM
+              </p>
+              <h1 className="text-2xl font-bold text-[#1C1917]">{title}</h1>
               {subtitle && (
-                <p className="mt-1 text-sm text-zinc-500">{subtitle}</p>
+                <p className="mt-1 text-sm text-[#7A6A53]">{subtitle}</p>
               )}
             </div>
 
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="border-red-900 text-red-300 hover:bg-red-950 hover:text-red-200"
+              className="border-[#D8C08A] bg-white text-[#8A6508] hover:bg-[#F3EAD7] hover:text-[#6F4E05]"
             >
               <LogOut className="mr-2 h-4 w-4" />
               Sair
@@ -133,9 +141,7 @@ export function AppShell({ title, subtitle, children }: AppShellProps) {
           </div>
         </header>
 
-        <div className="px-8 py-8">
-          {children}
-        </div>
+        <div className="px-8 py-8">{children}</div>
       </section>
     </main>
   )

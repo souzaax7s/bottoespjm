@@ -2,35 +2,18 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Save } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { AppShell } from '@/components/layout/app-shell'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import type { Configuracao, Profile } from '@/types/database'
-
-function formatarMoeda(valor: number) {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(valor)
-}
+import type { Profile } from '@/types/database'
 
 export default function ConfiguracoesPage() {
   const router = useRouter()
   const supabase = useMemo(() => createClient(), [])
 
   const [profile, setProfile] = useState<Profile | null>(null)
-  const [configuracao, setConfiguracao] = useState<Configuracao | null>(null)
-  const [valorBotao, setValorBotao] = useState('')
   const [loading, setLoading] = useState(true)
-  const [salvando, setSalvando] = useState(false)
   const [erro, setErro] = useState('')
-  const [mensagem, setMensagem] = useState('')
-
-  const isAdmin = profile?.role === 'admin'
 
   useEffect(() => {
     async function carregarDados() {
@@ -46,29 +29,16 @@ export default function ConfiguracoesPage() {
         return
       }
 
-      const { data: profileData, error: profileError } = await supabase
+      const { data, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', user.id)
         .single()
 
-      if (profileError) {
-        setErro(`Erro ao carregar perfil: ${profileError.message}`)
+      if (error) {
+        setErro(`Erro ao carregar perfil: ${error.message}`)
       } else {
-        setProfile(profileData)
-      }
-
-      const { data: configData, error: configError } = await supabase
-        .from('configuracoes')
-        .select('*')
-        .eq('id', 1)
-        .single()
-
-      if (configError) {
-        setErro(`Erro ao carregar configurações: ${configError.message}`)
-      } else {
-        setConfiguracao(configData)
-        setValorBotao(String(Number(configData.valor_botao).toFixed(2)).replace('.', ','))
+        setProfile(data)
       }
 
       setLoading(false)
@@ -77,51 +47,10 @@ export default function ConfiguracoesPage() {
     carregarDados()
   }, [router, supabase])
 
-  async function salvarConfiguracao() {
-    setErro('')
-    setMensagem('')
-
-    if (!isAdmin) {
-      setErro('Apenas administradores podem alterar configurações.')
-      return
-    }
-
-    const valorNormalizado = valorBotao.replace(',', '.').trim()
-    const novoValor = Number(valorNormalizado)
-
-    if (!Number.isFinite(novoValor) || novoValor <= 0) {
-      setErro('Digite um valor válido maior que zero.')
-      return
-    }
-
-    setSalvando(true)
-
-    const { data, error } = await supabase
-      .from('configuracoes')
-      .update({
-        valor_botao: novoValor,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', 1)
-      .select('*')
-      .single()
-
-    setSalvando(false)
-
-    if (error) {
-      setErro(`Erro ao salvar configuração: ${error.message}`)
-      return
-    }
-
-    setConfiguracao(data)
-    setValorBotao(String(Number(data.valor_botao).toFixed(2)).replace('.', ','))
-    setMensagem('Valor do botão atualizado com sucesso.')
-  }
-
   if (loading) {
     return (
-      <main className="min-h-screen bg-[#F8F5EE] text-[#1C1917] flex items-center justify-center">
-        <p className="text-[#7A6A53]">Carregando configurações...</p>
+      <main className="flex min-h-screen items-center justify-center bg-[#F4F6EF] text-[#1C1917]">
+        <p className="text-[#59624A]">Carregando configurações...</p>
       </main>
     )
   }
@@ -129,82 +58,60 @@ export default function ConfiguracoesPage() {
   return (
     <AppShell
       title="Configurações"
-      subtitle="Gerencie regras gerais do BOTÕES PJM."
+      subtitle="Preferências gerais e informações do sistema."
     >
       <section className="max-w-5xl">
         {erro && (
-          <div className="mb-6 rounded-xl border border-red-900 bg-red-950/40 p-4 text-sm text-red-300">
+          <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
             {erro}
           </div>
         )}
 
-        {mensagem && (
-          <div className="mb-6 rounded-xl border border-emerald-900 bg-emerald-950/40 p-4 text-sm text-emerald-300">
-            {mensagem}
-          </div>
-        )}
-
         <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
+          <Card className="border-[#D9DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle>Valor unitário do botão</CardTitle>
+              <CardTitle>Sistema</CardTitle>
             </CardHeader>
 
-            <CardContent className="space-y-5">
-              <div className="space-y-2">
-                <Label htmlFor="valorBotao">Valor por botão</Label>
-                <Input
-                  id="valorBotao"
-                  value={valorBotao}
-                  onChange={(event) => setValorBotao(event.target.value)}
-                  placeholder="0,05"
-                  disabled={!isAdmin || salvando}
-                  className="border-[#E7DEC8] bg-[#F8F5EE] text-[#1C1917]"
-                />
-                <p className="text-sm text-[#7A6A53]">
-                  Use vírgula ou ponto. Exemplo: 0,05 ou 0.05.
+            <CardContent className="space-y-4 text-[#59624A]">
+              <div className="rounded-xl border border-[#D9DEC8] bg-[#FBFCF7] p-4">
+                <p className="font-semibold text-[#1C1917]">BOTÕES PJM</p>
+                <p className="mt-2">
+                  Sistema de controle de produção, listas, histórico, financeiro
+                  e usuários.
                 </p>
               </div>
 
-              {!isAdmin && (
-                <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
-                  Seu perfil é OPERADOR. Você pode consultar esta tela, mas não pode alterar o valor.
-                </div>
-              )}
-
-              <Button
-                onClick={salvarConfiguracao}
-                disabled={!isAdmin || salvando}
-                className="w-full bg-[#B8860B] text-white hover:bg-[#9A7008]"
-              >
-                <Save className="mr-2 h-4 w-4" />
-                {salvando ? 'Salvando...' : 'Salvar novo valor'}
-              </Button>
+              <div className="rounded-xl border border-[#D9DEC8] bg-[#FBFCF7] p-4">
+                <p className="font-semibold text-[#1C1917]">Tema atual</p>
+                <p className="mt-2">Branco com verde militar.</p>
+              </div>
             </CardContent>
           </Card>
 
-          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
+          <Card className="border-[#D9DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle>Resumo atual</CardTitle>
+              <CardTitle>Perfil logado</CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-4">
-              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4">
-                <p className="text-sm text-[#7A6A53]">Valor atual</p>
-                <p className="mt-1 text-3xl font-bold">
-                  {formatarMoeda(Number(configuracao?.valor_botao ?? 0))}
-                </p>
+              <div className="rounded-xl border border-[#D9DEC8] bg-[#FBFCF7] p-4">
+                <p className="text-sm text-[#59624A]">Nome</p>
+                <p className="mt-1 text-xl font-bold">{profile?.nome}</p>
               </div>
 
-              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4">
-                <p className="text-sm text-[#7A6A53]">Perfil logado</p>
+              <div className="rounded-xl border border-[#D9DEC8] bg-[#FBFCF7] p-4">
+                <p className="text-sm text-[#59624A]">Cargo</p>
                 <p className="mt-1 text-xl font-bold uppercase">
                   {profile?.role}
                 </p>
               </div>
 
-              <div className="rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
-                Alterar o valor aqui afeta apenas os próximos registros. Produções antigas permanecem com o valor original salvo no momento do lançamento.
+              <div className="rounded-xl border border-[#D9DEC8] bg-[#FBFCF7] p-4">
+                <p className="text-sm text-[#59624A]">Status</p>
+                <p className="mt-1 text-xl font-bold">
+                  {profile?.ativo ? 'Ativo' : 'Inativo'}
+                </p>
               </div>
             </CardContent>
           </Card>

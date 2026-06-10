@@ -271,9 +271,9 @@ export default function HistoricoPage() {
         )}
 
         <div className="mb-6 grid gap-4 md:grid-cols-3">
-          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
+          <Card className="border-[#D9DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle className="text-sm text-[#7A6A53]">
+              <CardTitle className="text-sm text-[#59624A]">
                 Registros encontrados
               </CardTitle>
             </CardHeader>
@@ -282,9 +282,9 @@ export default function HistoricoPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
+          <Card className="border-[#D9DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle className="text-sm text-[#7A6A53]">
+              <CardTitle className="text-sm text-[#59624A]">
                 Total de botões
               </CardTitle>
             </CardHeader>
@@ -293,9 +293,9 @@ export default function HistoricoPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
+          <Card className="border-[#D9DEC8] bg-white text-[#1C1917]">
             <CardHeader>
-              <CardTitle className="text-sm text-[#7A6A53]">
+              <CardTitle className="text-sm text-[#59624A]">
                 Valor total
               </CardTitle>
             </CardHeader>
@@ -305,7 +305,7 @@ export default function HistoricoPage() {
           </Card>
         </div>
 
-        <Card className="border-[#E7DEC8] bg-white text-[#1C1917]">
+        <Card className="border-[#D9DEC8] bg-white text-[#1C1917]">
           <CardHeader>
             <CardTitle>Filtros</CardTitle>
           </CardHeader>
@@ -313,12 +313,12 @@ export default function HistoricoPage() {
           <CardContent>
             <div className="grid gap-4 md:grid-cols-[240px_1fr]">
               <div className="space-y-2">
-                <p className="text-sm text-[#7A6A53]">Período</p>
+                <p className="text-sm text-[#59624A]">Período</p>
                 <Select
                   value={periodo}
                   onValueChange={(value) => setPeriodo(value as Periodo)}
                 >
-                  <SelectTrigger className="border-[#E7DEC8] bg-[#F8F5EE] text-[#1C1917]">
+                  <SelectTrigger className="border-[#D9DEC8] bg-[#F4F6EF] text-[#1C1917]">
                     <SelectValue placeholder="Selecione o período" />
                   </SelectTrigger>
                   <SelectContent>
@@ -331,43 +331,43 @@ export default function HistoricoPage() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-sm text-[#7A6A53]">Pesquisar descrição</p>
+                <p className="text-sm text-[#59624A]">Pesquisar descrição</p>
                 <Input
                   value={pesquisa}
                   onChange={(event) => setPesquisa(event.target.value)}
                   placeholder="Exemplo: azul bb, preto, branco..."
-                  className="border-[#E7DEC8] bg-[#F8F5EE] text-[#1C1917]"
+                  className="border-[#D9DEC8] bg-[#F4F6EF] text-[#1C1917]"
                 />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="mt-6 border-[#E7DEC8] bg-white text-[#1C1917]">
+        <Card className="mt-6 border-[#D9DEC8] bg-white text-[#1C1917]">
           <CardHeader>
             <CardTitle>Registros</CardTitle>
           </CardHeader>
 
           <CardContent>
             {!isAdmin && (
-              <div className="mb-4 rounded-xl border border-[#E7DEC8] bg-[#F8F5EE] p-4 text-sm text-[#7A6A53]">
+              <div className="mb-4 rounded-xl border border-[#D9DEC8] bg-[#F4F6EF] p-4 text-sm text-[#59624A]">
                 Somente administradores podem apagar itens ou lotes.
               </div>
             )}
 
-            <div className="overflow-hidden rounded-xl border border-[#E7DEC8]">
+            <div className="overflow-hidden rounded-xl border border-[#D9DEC8]">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-[#E7DEC8]">
-                    <TableHead className="text-[#7A6A53]">Data</TableHead>
-                    <TableHead className="text-[#7A6A53]">Quantidade</TableHead>
-                    <TableHead className="text-[#7A6A53]">Descrição</TableHead>
-                    <TableHead className="text-[#7A6A53]">Valor unitário</TableHead>
-                    <TableHead className="text-right text-[#7A6A53]">
+                  <TableRow className="border-[#D9DEC8]">
+                    <TableHead className="text-[#59624A]">Data</TableHead>
+                    <TableHead className="text-[#59624A]">Quantidade</TableHead>
+                    <TableHead className="text-[#59624A]">Descrição</TableHead>
+                    <TableHead className="text-[#59624A]">Valor unitário</TableHead>
+                    <TableHead className="text-right text-[#59624A]">
                       Valor
                     </TableHead>
                     {isAdmin && (
-                      <TableHead className="text-right text-[#7A6A53]">
+                      <TableHead className="text-right text-[#59624A]">
                         Ações
                       </TableHead>
                     )}
@@ -376,26 +376,26 @@ export default function HistoricoPage() {
 
                 <TableBody>
                   {loading ? (
-                    <TableRow className="border-[#E7DEC8]">
+                    <TableRow className="border-[#D9DEC8]">
                       <TableCell
                         colSpan={isAdmin ? 6 : 5}
-                        className="py-8 text-center text-[#9A8A73]"
+                        className="py-8 text-center text-[#7B846A]"
                       >
                         Carregando histórico...
                       </TableCell>
                     </TableRow>
                   ) : producoes.length === 0 ? (
-                    <TableRow className="border-[#E7DEC8]">
+                    <TableRow className="border-[#D9DEC8]">
                       <TableCell
                         colSpan={isAdmin ? 6 : 5}
-                        className="py-8 text-center text-[#9A8A73]"
+                        className="py-8 text-center text-[#7B846A]"
                       >
                         Nenhum registro encontrado.
                       </TableCell>
                     </TableRow>
                   ) : (
                     producoes.map((item) => (
-                      <TableRow key={item.id} className="border-[#E7DEC8]">
+                      <TableRow key={item.id} className="border-[#D9DEC8]">
                         <TableCell>{formatarData(item.created_at)}</TableCell>
                         <TableCell>{item.quantidade}</TableCell>
                         <TableCell>{item.descricao}</TableCell>

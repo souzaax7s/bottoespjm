@@ -45,12 +45,12 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#F8F5EE] px-4 text-[#1C1917]">
+    <main className="flex min-h-screen items-center justify-center bg-[#F4F6EF] px-4 text-[#1C1917]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#F0DFB8,transparent_35%)]" />
 
-      <Card className="relative w-full max-w-md border-[#E7DEC8] bg-white text-[#1C1917] shadow-2xl">
+      <Card className="relative w-full max-w-md border-[#D9DEC8] bg-white text-[#1C1917] shadow-2xl">
         <CardHeader className="space-y-2">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-[#D8C08A] bg-white text-xl font-black text-[#1C1917] shadow-sm">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-[#A8B48A] bg-white text-xl font-black text-[#1C1917] shadow-sm">
             PJM
           </div>
 
@@ -58,7 +58,7 @@ export default function LoginPage() {
             BOTÕES PJM
           </CardTitle>
 
-          <CardDescription className="text-center text-[#7A6A53]">
+          <CardDescription className="text-center text-[#59624A]">
             Entre para controlar produção, histórico e financeiro.
           </CardDescription>
         </CardHeader>
@@ -74,7 +74,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
-                className="border-[#E7DEC8] bg-[#FFFCF7] text-[#1C1917]"
+                className="border-[#D9DEC8] bg-[#FBFCF7] text-[#1C1917]"
               />
             </div>
 
@@ -87,7 +87,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
-                className="border-[#E7DEC8] bg-[#FFFCF7] text-[#1C1917]"
+                className="border-[#D9DEC8] bg-[#FBFCF7] text-[#1C1917]"
               />
             </div>
 
@@ -100,7 +100,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#B8860B] text-white hover:bg-[#9A7008]"
+              className="w-full bg-[#4B5320] text-white hover:bg-[#344016]"
             >
               {loading ? 'Entrando...' : 'Entrar'}
             </Button>

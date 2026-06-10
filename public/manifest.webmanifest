@@ -6,8 +6,8 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#F8F5EE",
-  "theme_color": "#B8860B",
+  "background_color": "#F4F6EF",
+  "theme_color": "#4B5320",
   "icons": [
     {
       "src": "/icons/pjm-icon.svg",

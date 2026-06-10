@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { AppShell } from '@/components/layout/app-shell'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -33,7 +34,7 @@ function formatarData(data: string) {
 
 export default function DashboardPage() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
 
   const [profile, setProfile] = useState<Profile | null>(null)
   const [configuracao, setConfiguracao] = useState<Configuracao | null>(null)
@@ -129,12 +130,6 @@ export default function DashboardPage() {
 
   const totalRegistrosHoje = producoesHoje.length
 
-  async function handleLogout() {
-    await supabase.auth.signOut()
-    router.push('/login')
-    router.refresh()
-  }
-
   if (loading) {
     return (
       <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
@@ -144,30 +139,11 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
-      <header className="border-b border-zinc-800 bg-zinc-950">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <div>
-            <p className="text-sm text-zinc-400">BOTÕES PJM</p>
-            <h1 className="text-2xl font-bold">Dashboard</h1>
-            <p className="mt-1 text-sm text-zinc-500">
-              {profile?.nome} • {profile?.role?.toUpperCase()}
-            </p>
-          </div>
-
-          <div className="flex gap-2">
-            <Button onClick={() => router.push('/producao')}>
-              Nova produção
-            </Button>
-
-            <Button variant="outline" onClick={handleLogout}>
-              Sair
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <section className="mx-auto max-w-6xl px-6 py-8">
+    <AppShell
+      title="Dashboard"
+      subtitle={`${profile?.nome ?? 'Usuário'} • ${profile?.role?.toUpperCase() ?? ''}`}
+    >
+      <section className="max-w-7xl">
         {erro && (
           <div className="mb-6 rounded-xl border border-red-900 bg-red-950/40 p-4 text-sm text-red-300">
             {erro}
@@ -183,9 +159,7 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold">{totalRegistrosHoje}</p>
-              <p className="mt-1 text-sm text-zinc-400">
-                registros lançados
-              </p>
+              <p className="mt-1 text-sm text-zinc-400">registros lançados</p>
             </CardContent>
           </Card>
 
@@ -197,9 +171,7 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold">{totalBotoesHoje}</p>
-              <p className="mt-1 text-sm text-zinc-400">
-                botões produzidos hoje
-              </p>
+              <p className="mt-1 text-sm text-zinc-400">botões produzidos hoje</p>
             </CardContent>
           </Card>
 
@@ -211,9 +183,7 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold">{formatarMoeda(valorTotalHoje)}</p>
-              <p className="mt-1 text-sm text-zinc-400">
-                calculado automaticamente
-              </p>
+              <p className="mt-1 text-sm text-zinc-400">calculado automaticamente</p>
             </CardContent>
           </Card>
 
@@ -227,9 +197,7 @@ export default function DashboardPage() {
               <p className="text-3xl font-bold">
                 {formatarMoeda(Number(configuracao?.valor_botao ?? 0))}
               </p>
-              <p className="mt-1 text-sm text-zinc-400">
-                valor atual configurado
-              </p>
+              <p className="mt-1 text-sm text-zinc-400">valor atual configurado</p>
             </CardContent>
           </Card>
         </div>
@@ -287,8 +255,8 @@ export default function DashboardPage() {
                 Registrar produção
               </Button>
 
-              <Button variant="outline" className="w-full" onClick={() => router.push('/dashboard')}>
-                Atualizar dashboard
+              <Button variant="outline" className="w-full" onClick={() => router.push('/historico')}>
+                Ver histórico
               </Button>
 
               <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
@@ -302,6 +270,6 @@ export default function DashboardPage() {
           </Card>
         </div>
       </section>
-    </main>
+    </AppShell>
   )
 }

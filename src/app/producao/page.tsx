@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { parseProducoes, formatarMoeda } from '@/lib/parser/producao-parser'
+import { AppShell } from '@/components/layout/app-shell'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -18,7 +19,7 @@ import {
 
 export default function NovaProducaoPage() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
 
   const [usuarioId, setUsuarioId] = useState<string | null>(null)
   const [valorBotao, setValorBotao] = useState(0.05)
@@ -117,23 +118,11 @@ export default function NovaProducaoPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
-      <header className="border-b border-zinc-800 bg-zinc-950">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <div>
-            <p className="text-sm text-zinc-400">BOTÕES PJM</p>
-            <h1 className="text-2xl font-bold">Nova Produção</h1>
-          </div>
-
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={() => router.push('/dashboard')}>
-              Dashboard
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <section className="mx-auto grid max-w-6xl gap-6 px-6 py-8 lg:grid-cols-[1fr_1fr]">
+    <AppShell
+      title="Nova Produção"
+      subtitle="Registre a produção diária usando entrada rápida."
+    >
+      <section className="grid max-w-7xl gap-6 lg:grid-cols-[1fr_1fr]">
         <Card className="border-zinc-800 bg-zinc-900 text-white">
           <CardHeader>
             <CardTitle>Entrada rápida</CardTitle>
@@ -236,6 +225,6 @@ export default function NovaProducaoPage() {
           </CardContent>
         </Card>
       </section>
-    </main>
+    </AppShell>
   )
 }

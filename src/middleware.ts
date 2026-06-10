@@ -4,6 +4,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 const privateRoutes = [
   '/dashboard',
   '/producao',
+  '/listas',
   '/historico',
   '/financeiro',
   '/configuracoes',
@@ -69,6 +70,7 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/producao/:path*',
+    '/listas/:path*',
     '/historico/:path*',
     '/financeiro/:path*',
     '/configuracoes/:path*',

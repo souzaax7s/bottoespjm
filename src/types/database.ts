@@ -25,3 +25,14 @@ export type Producao = {
   valor: number
   created_at: string
 }
+export type ListaProducao = {
+  id: string
+  admin_id: string
+  operador_id: string
+  titulo: string
+  conteudo: string
+  status: 'pendente' | 'em_producao' | 'concluida' | 'cancelada'
+  created_at: string
+  started_at: string | null
+  completed_at: string | null
+}

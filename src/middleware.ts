@@ -1,6 +1,15 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+const privateRoutes = [
+  '/dashboard',
+  '/producao',
+  '/historico',
+  '/financeiro',
+  '/configuracoes',
+  '/usuarios',
+]
+
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
     request,
@@ -35,7 +44,11 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const isPrivateRoute = request.nextUrl.pathname.startsWith('/dashboard')
+  const pathname = request.nextUrl.pathname
+
+  const isPrivateRoute = privateRoutes.some((route) =>
+    pathname.startsWith(route)
+  )
 
   if (isPrivateRoute && !user) {
     const url = request.nextUrl.clone()
@@ -43,7 +56,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  if (request.nextUrl.pathname === '/login' && user) {
+  if (pathname === '/login' && user) {
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard'
     return NextResponse.redirect(url)
@@ -53,5 +66,13 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login'],
+  matcher: [
+    '/dashboard/:path*',
+    '/producao/:path*',
+    '/historico/:path*',
+    '/financeiro/:path*',
+    '/configuracoes/:path*',
+    '/usuarios/:path*',
+    '/login',
+  ],
 }
